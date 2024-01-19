@@ -2,11 +2,16 @@ version: "3"
 
 services:
   nodejs:
-    # fill out the configuration here
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nodejs-app
+    container_name: nodejs
+    restart: unless-stopped
     networks:
       - app-network
 
-  # the nginx configuration is given below
+ # the nginx configuration is given below
   # the website will run on localhost:80
   webserver:
     image: nginx:mainline-alpine
@@ -22,14 +27,14 @@ services:
     networks:
       - app-network
 
+
 volumes:
-  web-root:
+  web-root: 
     driver: local
-    driver_opts:
+    driver_opts: 
       type: none
-      # fill out your absolute path to your folder here
-      device: /absolute/path/to/web/template/folder
-      o: bind
+      device: /home/gjones10/p1/web-template/
+      o: bind 
 
 networks:
   app-network:
